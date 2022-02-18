@@ -1,0 +1,14 @@
+-----------InLIne dynamic Add css----------------------
+
+>EX-1
+
+    const [isVaild,setIsValid] = useState(true)
+
+    <label style={{color: !isVaild?'red':'black'}}>Course Goal</label>
+    <input type="text" style={{borderColor: !isVaild?'red':'black'}} onChange={goalInputChangeHandler} />
+
+
+>EX-2
+
+    <div className={`form-control ${!isVaild ? 'invalid':''}`}>
+        -using string literal we are adding dynamc className(invalid)

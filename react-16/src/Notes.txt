@@ -1,0 +1,57 @@
+State
+-----------
+
+    >onClick comp comp function execute again
+    > react not reinitalize value initial value
+    (initial value doesn't change)
+
+    const [title, setTitle] = useState(props.title);
+    here title value will change 
+    but props.title(initial value)  will not change 
+
+EX-1> Updating State That Depends On The Previous State
+
+const [userInput,setUserInput]=useState({
+  enteredTitle:'',
+  enteredAmount:'',
+  ebteredDate:''
+})
+
+const changeHandler=(event)=>{
+    console.log(event.target.value);
+    setUserInput({...userInput,
+    enteredTitle:event.target.value
+  })
+  setUserInput((prevState)=>{
+    return {...prevState,enteredTitle:event,target.value}
+  })
+}
+
+----------------------------------------
+>batter be to save Previous state of obj
+    
+    -setUserInput((prevState)=>{
+        	return {...prevState,enteredTitle:event,target.value}
+    })
+
+    -setUserInput({...userInput,
+        enteredTitle:event.target.value
+    })
+    this also work but can't trust
+
+
+Controlled costumcomponent-> value and change of value are not handle in the same component
+            but handle in parent component
+
+Control component > manage state, and 2way binding binding etc
+
+
+{filteredExpenses.length===0 && <p>No expenses founds</p>}
+    - if 1st condition is true then it will emit o/p after && operater
+
+
+
+
+style take obj (key value pair) in react
+style={{'background-color':'red'}}
+style={{backgroundColor:'red'}}
