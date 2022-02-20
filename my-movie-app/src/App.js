@@ -14,24 +14,35 @@ function App() {
     setIsLoading(true);
     setError(null)
     try{
-      const responce=await fetch('https://swapi.dev/api/films/')
+      const responce=await fetch('https://react-http-30473-default-rtdb.firebaseio.com/movies.json')
       
       if(!responce.ok){
         throw new Error('Something went wrong!');        
       }
       
       const data=await responce.json()
-      // console.log(data.result)
+      // console.log("get data",data)
 
-          const transformedMovies = data.results.map((movieData) => {
+      const loadeMovies = [];
+
+      for(const key in data){
+         loadeMovies.push({
+           id:key,
+           title:data[key].title,
+           openingText:data[key].openingText,
+            releaseDate:data[key].releaseDate
+         })
+      }
+
+          /* const transformedMovies = data.results.map((movieData) => {
             return {
               id: movieData.episode_id,
               title: movieData.title,
               openingText: movieData.opening_crawl,
               releaseDate: movieData.release_date,
             };
-          });
-          setMovies(transformedMovies);
+          }); */
+          setMovies(loadeMovies);
     }catch(error){
       setError(error.message)
     }
@@ -43,8 +54,17 @@ function App() {
     fetchMoviesHandler()
   },[fetchMoviesHandler])
 
-  // const addMovieHandler=()=>{}
-
+  const addMovieHandler=async (movie)=>{
+      const response= await fetch('https://react-http-30473-default-rtdb.firebaseio.com/movies.json',{
+      method:'POST',
+      body:JSON.stringify(movie),
+      header:{
+        'context-type':'application/json'
+      }
+    })
+    const data= await response.json()
+    console.log(data)
+  }
   let content = <p>Found no Movies.</p>
 
   if(movies.length>0){
@@ -59,7 +79,7 @@ function App() {
   return (
     <React.Fragment>
       <section>
-        <AddMovie/>
+        <AddMovie onAddMovie={addMovieHandler}/>
       </section>
       <section>
       <h6>{JSON.stringify(movies)}</h6>
