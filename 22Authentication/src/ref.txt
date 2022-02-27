@@ -1,0 +1,7 @@
+https://console.firebase.google.com/u/0/project/authentication-react-app-92752/authentication/providers
+
+main page:-
+https://firebase.google.com/docs/reference/rest/auth#section-create-email-password
+
+ApI key(
+AIzaSyDa7_DsYbZT2p56eHjP3TFtDsJsJq3jfic)
